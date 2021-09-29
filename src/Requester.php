@@ -7,6 +7,7 @@ use HumanToComputer\Universign\Response\TransactionInfo;
 use HumanToComputer\Universign\Response\TransactionResponse;
 use HumanToComputer\Universign\Response\TransactionDocument;
 use UnexpectedValueException;
+use xmlrpc_client;
 
 require_once dirname(__DIR__) . '/lib/xmlrpc/xmlrpc.inc';
 require_once dirname(__DIR__) . '/lib/xmlrpc/xmlrpcs.inc';
@@ -27,13 +28,13 @@ class Requester
         $this->debug = $debug;
     }
 
-    /** 
+    /**
      * Send documents + signers to Universign and return the URL + the ID of the document
-     * 
-     * @param   \HumanToComputer\Universign\Request\TransactionRequest $transactionRequest
-     * @return  \HumanToComputer\Universign\Response\TransactionResponse
+     *
+     * @param TransactionRequest $transactionRequest
+     * @return  TransactionResponse
      */
-    public function requestTransaction(TransactionRequest $transactionRequest)
+    public function requestTransaction(TransactionRequest $transactionRequest): TransactionResponse
     {
         $client = $this->getClient();
         $request = new \xmlrpcmsg('requester.requestTransaction', [$transactionRequest->buildRpcValues()]);
@@ -50,12 +51,12 @@ class Requester
 
         throw new UnexpectedValueException($response);
     }
-    
-    /** 
+
+    /**
      * Get documents for customId
-     * 
+     *
      * @param   string $customId
-     * @return  \HumanToComputer\Universign\Response\TransactionDocument[]
+     * @return  TransactionDocument[]
      */
     public function getDocumentsByCustomId($customId)
     {
@@ -71,16 +72,16 @@ class Requester
             }
 
             return $data;
-        } 
+        }
 
         throw new UnexpectedValueException($response);
     }
 
-    /** 
+    /**
      * Get documents for transactionId
-     * 
+     *
      * @param   string $transactionId
-     * @return  \HumanToComputer\Universign\Response\TransactionDocument[]
+     * @return  TransactionDocument[]
      */
     public function getDocuments($transactionId)
     {
@@ -96,7 +97,7 @@ class Requester
             }
 
             return $data;
-        } 
+        }
 
         throw new UnexpectedValueException($response);
     }
@@ -106,7 +107,7 @@ class Requester
      * Get transaction info for transactionId
      *
      * @param   string $transactionId
-     * @return  \HumanToComputer\Universign\Response\TransactionInfo[]
+     * @return  TransactionInfo[]
      */
     public function getTransactionInfo($transactionId)
     {
@@ -129,16 +130,16 @@ class Requester
     }
 
 
-    private function getURLRequest() 
-    {
+    private function getURLRequest(): string
+	{
         if($this->isTest) {
             return 'https://' . $this->userMail . ':'. $this->userPassword  . '@ws.test.universign.eu/sign/rpc/';
         }
         return 'https://' . $this->userMail . ':'. $this->userPassword  . '@ws.universign.eu/sign/rpc/';
     }
-    
-    private function getClient() {
-        $client = new \xmlrpc_client($this->getURLRequest());
+
+	private function getClient(): xmlrpc_client {
+        $client = new xmlrpc_client($this->getURLRequest());
         $client->setSSLVerifyHost(1);
         $client->setSSLVerifyPeer(1);
         $client->setDebug(0);
