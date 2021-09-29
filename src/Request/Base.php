@@ -8,22 +8,7 @@ require_once dirname(__DIR__) . '/../lib/xmlrpc/xmlrpc.inc';
 require_once dirname(__DIR__) . '/../lib/xmlrpc/xmlrpcs.inc';
 require_once dirname(__DIR__) . '/../lib/xmlrpc/xmlrpc_wrappers.inc';
 
-abstract class TransactionRequestLanguage
-{
-    const BULGARIAN = 'bg';
-    const CATALAN = 'ca';
-    const GERMAN = 'de';
-    const ENGLISH = 'en';
-    const SPANISH = 'es';
-    const FRENCH = 'fr';
-    const ITALIAN = 'it';
-    const DUTCH = 'nl';
-    const POLISH = 'pl';
-    const PORTUGUESE = 'pt';
-    const ROMANIAN = 'ro';
-}
-
-abstract class Base 
+abstract class Base
 {
     protected $attributes = [];
     protected $attributesTypes = [];

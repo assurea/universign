@@ -1,37 +1,265 @@
 <?php
 
 namespace HumanToComputer\Universign\Request;
-// require_once dirname(__DIR__) . '/Base.php';
-
-abstract class TransactionRequestChainingMode
-{
-    const CHAINING_MODE_NONE = 'none';
-    const CHAINING_MODE_EMAIL = 'email';
-    const CHAINING_MODE_WEB = 'web';
-}
-
-abstract class TransactionRequestCertificate
-{
-    const CERTIFICATE_SIMPLE = 'simple';
-    const CERTIFICATE_CERTIFIED = 'certified';
-    const CERTIFICATE_ADVANCED = 'advanced';
-}
 
 class TransactionRequest extends Base
 {
-    protected $attributesTypes = [
-        'profile' => 'string',
-        'customId' => 'string',
-        'signers' => 'array',
-        'documents' => 'array',
-        'mustContactFirstSigner' => 'bool',
-        'finalDocSent' => 'bool',
-        'description' => 'string',
-        'certificateType' => 'string',
-        'language' => 'string',
-        'handwrittenSignature' => 'bool',
-        'chainingMode' => 'string',
-    ];
+	/**
+	 * @var string
+	 */
+	protected $profile;
+
+	/**
+	 * @var string
+	 */
+	protected $customId;
+
+	/**
+	 * @var TransactionSigner[]
+	 */
+	protected $signers;
+
+	/**
+	 * @var TransactionDocument[]
+	 */
+	protected $documents;
+
+	/**
+	 * @var bool
+	 */
+	protected $mustContactFirstSigner;
+
+	/**
+	 * @var bool
+	 */
+	protected $finalDocSent;
+
+	/**
+	 * @var string
+	 */
+	protected $description;
+
+	/**
+	 * @var string
+	 * use TransactionRequestCertificate
+	 */
+	protected $certificateType;
+
+	/**
+	 * @var string
+	 * use TransactionRequestLanguage
+	 */
+	protected $language;
+
+	/**
+	 * @var bool
+	 */
+	protected $handwrittenSignature;
+
+	/**
+	 * @var string
+	 * user TransactionRequestChainingMode
+	 */
+	protected $chainingMode;
+
+	/**
+	 * @return string
+	 */
+	public function getProfile(): string
+	{
+		return $this->profile;
+	}
+
+	/**
+	 * @param string $profile
+	 * @return TransactionRequest
+	 */
+	public function setProfile(string $profile): TransactionRequest
+	{
+		$this->profile = $profile;
+		return $this;
+	}
+
+	/**
+	 * @return string
+	 */
+	public function getCustomId(): string
+	{
+		return $this->customId;
+	}
+
+	/**
+	 * @param string $customId
+	 * @return TransactionRequest
+	 */
+	public function setCustomId(string $customId): TransactionRequest
+	{
+		$this->customId = $customId;
+		return $this;
+	}
+
+	/**
+	 * @return TransactionSigner[]
+	 */
+	public function getSigners(): array
+	{
+		return $this->signers;
+	}
+
+	/**
+	 * @param TransactionSigner[] $signers
+	 * @return TransactionRequest
+	 */
+	public function setSigners(array $signers): TransactionRequest
+	{
+		$this->signers = $signers;
+		return $this;
+	}
+
+	/**
+	 * @return TransactionDocument[]
+	 */
+	public function getDocuments(): array
+	{
+		return $this->documents;
+	}
+
+	/**
+	 * @param TransactionDocument[] $documents
+	 * @return TransactionRequest
+	 */
+	public function setDocuments(array $documents): TransactionRequest
+	{
+		$this->documents = $documents;
+		return $this;
+	}
+
+	/**
+	 * @return bool
+	 */
+	public function isMustContactFirstSigner(): bool
+	{
+		return $this->mustContactFirstSigner;
+	}
+
+	/**
+	 * @param bool $mustContactFirstSigner
+	 * @return TransactionRequest
+	 */
+	public function setMustContactFirstSigner(bool $mustContactFirstSigner): TransactionRequest
+	{
+		$this->mustContactFirstSigner = $mustContactFirstSigner;
+		return $this;
+	}
+
+	/**
+	 * @return bool
+	 */
+	public function isFinalDocSent(): bool
+	{
+		return $this->finalDocSent;
+	}
+
+	/**
+	 * @param bool $finalDocSent
+	 * @return TransactionRequest
+	 */
+	public function setFinalDocSent(bool $finalDocSent): TransactionRequest
+	{
+		$this->finalDocSent = $finalDocSent;
+		return $this;
+	}
+
+	/**
+	 * @return string
+	 */
+	public function getDescription(): string
+	{
+		return $this->description;
+	}
+
+	/**
+	 * @param string $description
+	 * @return TransactionRequest
+	 */
+	public function setDescription(string $description): TransactionRequest
+	{
+		$this->description = $description;
+		return $this;
+	}
+
+	/**
+	 * @return string
+	 */
+	public function getCertificateType(): string
+	{
+		return $this->certificateType;
+	}
+
+	/**
+	 * @param string $certificateType
+	 * @return TransactionRequest
+	 */
+	public function setCertificateType(string $certificateType): TransactionRequest
+	{
+		$this->certificateType = $certificateType;
+		return $this;
+	}
+
+	/**
+	 * @return string
+	 */
+	public function getLanguage(): string
+	{
+		return $this->language;
+	}
+
+	/**
+	 * @param string $language
+	 * @return TransactionRequest
+	 */
+	public function setLanguage(string $language): TransactionRequest
+	{
+		$this->language = $language;
+		return $this;
+	}
+
+	/**
+	 * @return bool
+	 */
+	public function isHandwrittenSignature(): bool
+	{
+		return $this->handwrittenSignature;
+	}
+
+	/**
+	 * @param bool $handwrittenSignature
+	 * @return TransactionRequest
+	 */
+	public function setHandwrittenSignature(bool $handwrittenSignature): TransactionRequest
+	{
+		$this->handwrittenSignature = $handwrittenSignature;
+		return $this;
+	}
+
+	/**
+	 * @return string
+	 */
+	public function getChainingMode(): string
+	{
+		return $this->chainingMode;
+	}
+
+	/**
+	 * @param string $chainingMode
+	 * @return TransactionRequest
+	 */
+	public function setChainingMode(string $chainingMode): TransactionRequest
+	{
+		$this->chainingMode = $chainingMode;
+		return $this;
+	}
+
 
     public function addSigner(TransactionSigner $signer)
     {
