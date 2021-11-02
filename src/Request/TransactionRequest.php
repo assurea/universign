@@ -23,7 +23,7 @@ class TransactionRequest extends Base
 		$build = [];
 
 		foreach($vals as $prop => $type) {
-			if(!empty($this->{$prop})) {
+			if($this->{$prop} !== null && $this->{$prop} !== '') {
 				$build[$prop] = self::buildRpcValue($this->{$prop}, $type);
 			}
 		}
