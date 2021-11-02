@@ -4,6 +4,21 @@ namespace HumanToComputer\Universign\Request;
 
 class SignOption extends Base
 {
+	public function buildRpcValues(): \xmlrpcval
+	{
+		$build = [];
+
+		$build['profile'] = self::buildRpcValue($this->profile, 'string');
+		$build['signatureField'] = self::buildRpcValue($this->signatureField);
+		$build['reason'] = self::buildRpcValue($this->reason, 'string');
+		$build['location'] = self::buildRpcValue($this->location, 'string');
+		$build['signatureFormat'] = self::buildRpcValue($this->signatureFormat, 'string');
+		$build['language'] = self::buildRpcValue($this->language, 'string');
+		$build['patternName'] = self::buildRpcValue($this->patternName, 'string');
+
+		return new \xmlrpcval($build, 'struct');
+	}
+
 	/**
 	 * @var string
 	 */

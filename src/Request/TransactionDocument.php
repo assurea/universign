@@ -5,6 +5,21 @@ namespace HumanToComputer\Universign\Request;
 
 class TransactionDocument extends Base
 {
+	public function buildRpcValues(): \xmlrpcval
+	{
+		$build = [];
+
+		$build['documentType'] = self::buildRpcValue($this->documentType, 'string');
+		$build['content'] = self::buildRpcValue($this->content, 'base64');
+		$build['url'] = self::buildRpcValue($this->url, 'string');
+		$build['name'] = self::buildRpcValue($this->name, 'string');
+		$build['title'] = self::buildRpcValue($this->title, 'string');
+		$build['SEPAData'] = self::buildRpcValue($this->SEPAData);
+		$build['signatureFields'] = self::buildRpcValue($this->signatureFields, 'array');
+
+		return new \xmlrpcval($build, 'struct');
+	}
+
 	/**
 	 * @var string
 	 */

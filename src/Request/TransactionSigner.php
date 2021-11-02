@@ -6,6 +6,23 @@ use DateTime;
 
 class TransactionSigner extends Base
 {
+	public function buildRpcValues(): \xmlrpcval
+	{
+		$build = [];
+
+		$build['firstname'] = self::buildRpcValue($this->firstname, 'string');
+		$build['lastname'] = self::buildRpcValue($this->lastname, 'string');
+		$build['organization'] = self::buildRpcValue($this->organization, 'string');
+		$build['emailAddress'] = self::buildRpcValue($this->emailAddress, 'string');
+		$build['phoneNum'] = self::buildRpcValue($this->phoneNum, 'string');
+		$build['birthDate'] = self::buildRpcValue($this->birthDate, 'dateTime');
+		$build['successURL'] = self::buildRpcValue($this->successURL, 'string');
+		$build['cancelURL'] = self::buildRpcValue($this->cancelURL, 'string');
+		$build['failURL'] = self::buildRpcValue($this->failURL, 'string');
+
+		return new \xmlrpcval($build, 'struct');
+	}
+
 	/**
 	 * @var string
 	 */

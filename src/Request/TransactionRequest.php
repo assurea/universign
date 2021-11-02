@@ -4,6 +4,25 @@ namespace HumanToComputer\Universign\Request;
 
 class TransactionRequest extends Base
 {
+	public function buildRpcValues(): \xmlrpcval
+	{
+		$build = [];
+
+		$build['profile'] = self::buildRpcValue($this->profile, 'string');
+		$build['customId'] = self::buildRpcValue($this->customId, 'string');
+		$build['signers'] = self::buildRpcValue($this->signers, 'array');
+		$build['documents'] = self::buildRpcValue($this->documents, 'array');
+		$build['mustContactFirstSigner'] = self::buildRpcValue($this->mustContactFirstSigner, 'bool');
+		$build['finalDocSent'] = self::buildRpcValue($this->finalDocSent, 'bool');
+		$build['description'] = self::buildRpcValue($this->description, 'string');
+		$build['certificateType'] = self::buildRpcValue($this->certificateType, 'string');
+		$build['language'] = self::buildRpcValue($this->language, 'string');
+		$build['handwrittenSignature'] = self::buildRpcValue($this->handwrittenSignature, 'bool');
+		$build['chainingMode'] = self::buildRpcValue($this->chainingMode, 'string');
+
+		return new \xmlrpcval($build, 'struct');
+	}
+
 	/**
 	 * @var string
 	 */
@@ -263,13 +282,13 @@ class TransactionRequest extends Base
 
     public function addSigner(TransactionSigner $signer)
     {
-        $this->attributes['signers'][] = $signer;
+    	$this->signers[] = $signer;
         return $this;
     }
 
     public function addDocument(TransactionDocument $document)
     {
-        $this->attributes['documents'][] = $document;
+		$this->documents[] = $document;
         return $this;
     }
 }

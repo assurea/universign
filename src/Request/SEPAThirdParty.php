@@ -4,6 +4,20 @@ namespace HumanToComputer\Universign\Request;
 
 class SEPAThirdParty extends Base
 {
+	public function buildRpcValues(): \xmlrpcval
+	{
+
+		$build = [];
+
+		$build['name'] = self::buildRpcValue($this->name, 'string');
+		$build['address'] = self::buildRpcValue($this->address, 'string');
+		$build['postalCode'] = self::buildRpcValue($this->postalCode, 'string');
+		$build['city'] = self::buildRpcValue($this->city, 'string');
+		$build['country'] = self::buildRpcValue($this->country, 'string');
+
+		return new \xmlrpcval($build, 'struct');
+	}
+
 	/**
 	 * @var string
 	 */

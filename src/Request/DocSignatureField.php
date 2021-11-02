@@ -4,6 +4,20 @@ namespace HumanToComputer\Universign\Request;
 
 class DocSignatureField extends Base
 {
+	public function buildRpcValues(): \xmlrpcval
+	{
+		$build = [];
+
+		$build['name'] = self::buildRpcValue($this->name, 'string');
+		$build['page'] = self::buildRpcValue($this->page, 'int');
+		$build['x'] = self::buildRpcValue($this->x, 'int');
+		$build['y'] = self::buildRpcValue($this->y, 'int');
+		$build['signerIndex'] = self::buildRpcValue($this->signerIndex, 'int');
+
+		return new \xmlrpcval($build, 'struct');
+	}
+
+
 	/**
 	 * @var string
 	 */

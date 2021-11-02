@@ -5,6 +5,23 @@ namespace HumanToComputer\Universign\Request;
 class SEPAData extends Base
 {
 
+	public function buildRpcValues(): \xmlrpcval
+	{
+
+
+		$build = [];
+
+		$build['rum'] = self::buildRpcValue($this->rum, 'string');
+		$build['ics'] = self::buildRpcValue($this->ics, 'string');
+		$build['iban'] = self::buildRpcValue($this->iban, 'string');
+		$build['bic'] = self::buildRpcValue($this->bic, 'string');
+		$build['recurring'] = self::buildRpcValue($this->recurring, 'bool');
+		$build['debtor'] = self::buildRpcValue($this->debtor);
+		$build['creditor'] = self::buildRpcValue($this->creditor);
+
+		return new \xmlrpcval($build, 'struct');
+	}
+
 	/**
 	 * @var string
 	 */
