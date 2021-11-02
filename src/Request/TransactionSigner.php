@@ -8,17 +8,25 @@ class TransactionSigner extends Base
 {
 	public function buildRpcValues(): \xmlrpcval
 	{
+		$vals = [
+			'firstname' => 'string',
+			'lastname' => 'string',
+			'organization' => 'string',
+			'emailAddress' => 'string',
+			'phoneNum' => 'string',
+			'birthDate' => 'dateTime',
+			'successURL' => 'string',
+			'cancelURL' => 'string',
+			'failURL' => 'string',
+		];
+
 		$build = [];
 
-		$build['firstname'] = self::buildRpcValue($this->firstname, 'string');
-		$build['lastname'] = self::buildRpcValue($this->lastname, 'string');
-		$build['organization'] = self::buildRpcValue($this->organization, 'string');
-		$build['emailAddress'] = self::buildRpcValue($this->emailAddress, 'string');
-		$build['phoneNum'] = self::buildRpcValue($this->phoneNum, 'string');
-		$build['birthDate'] = self::buildRpcValue($this->birthDate, 'dateTime');
-		$build['successURL'] = self::buildRpcValue($this->successURL, 'string');
-		$build['cancelURL'] = self::buildRpcValue($this->cancelURL, 'string');
-		$build['failURL'] = self::buildRpcValue($this->failURL, 'string');
+		foreach($vals as $prop => $type) {
+			if(!empty($this->{$prop})) {
+				$build[$prop] = self::buildRpcValue($this->{$prop}, $type);
+			}
+		}
 
 		return new \xmlrpcval($build, 'struct');
 	}

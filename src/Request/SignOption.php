@@ -6,15 +6,23 @@ class SignOption extends Base
 {
 	public function buildRpcValues(): \xmlrpcval
 	{
+		$vals = [
+			'profile' => 'string',
+			'signatureField' => null,
+			'reason' => 'string',
+			'location' => 'string',
+			'signatureFormat' => 'string',
+			'language' => 'string',
+			'patternName' => 'string',
+		];
+
 		$build = [];
 
-		$build['profile'] = self::buildRpcValue($this->profile, 'string');
-		$build['signatureField'] = self::buildRpcValue($this->signatureField);
-		$build['reason'] = self::buildRpcValue($this->reason, 'string');
-		$build['location'] = self::buildRpcValue($this->location, 'string');
-		$build['signatureFormat'] = self::buildRpcValue($this->signatureFormat, 'string');
-		$build['language'] = self::buildRpcValue($this->language, 'string');
-		$build['patternName'] = self::buildRpcValue($this->patternName, 'string');
+		foreach($vals as $prop => $type) {
+			if(!empty($this->{$prop})) {
+				$build[$prop] = self::buildRpcValue($this->{$prop}, $type);
+			}
+		}
 
 		return new \xmlrpcval($build, 'struct');
 	}

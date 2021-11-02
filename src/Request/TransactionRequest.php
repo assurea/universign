@@ -6,19 +6,27 @@ class TransactionRequest extends Base
 {
 	public function buildRpcValues(): \xmlrpcval
 	{
+		$vals = [
+			'profile' => 'string',
+			'customId' => 'string',
+			'signers' => 'array',
+			'documents' => 'array',
+			'mustContactFirstSigner' => 'bool',
+			'finalDocSent' => 'bool',
+			'description' => 'string',
+			'certificateType' => 'string',
+			'language' => 'string',
+			'handwrittenSignature' => 'bool',
+			'chainingMode' => 'string',
+		];
+
 		$build = [];
 
-		$build['profile'] = self::buildRpcValue($this->profile, 'string');
-		$build['customId'] = self::buildRpcValue($this->customId, 'string');
-		$build['signers'] = self::buildRpcValue($this->signers, 'array');
-		$build['documents'] = self::buildRpcValue($this->documents, 'array');
-		$build['mustContactFirstSigner'] = self::buildRpcValue($this->mustContactFirstSigner, 'bool');
-		$build['finalDocSent'] = self::buildRpcValue($this->finalDocSent, 'bool');
-		$build['description'] = self::buildRpcValue($this->description, 'string');
-		$build['certificateType'] = self::buildRpcValue($this->certificateType, 'string');
-		$build['language'] = self::buildRpcValue($this->language, 'string');
-		$build['handwrittenSignature'] = self::buildRpcValue($this->handwrittenSignature, 'bool');
-		$build['chainingMode'] = self::buildRpcValue($this->chainingMode, 'string');
+		foreach($vals as $prop => $type) {
+			if(!empty($this->{$prop})) {
+				$build[$prop] = self::buildRpcValue($this->{$prop}, $type);
+			}
+		}
 
 		return new \xmlrpcval($build, 'struct');
 	}

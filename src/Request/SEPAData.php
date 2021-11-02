@@ -9,17 +9,26 @@ class SEPAData extends Base
 	{
 
 
+		$vals = [
+			'rum' => 'string',
+			'ics' => 'string',
+			'iban' => 'string',
+			'bic' => 'string',
+			'recurring' => 'bool',
+			'debtor' => null,
+			'creditor' => null,
+		];
+
 		$build = [];
 
-		$build['rum'] = self::buildRpcValue($this->rum, 'string');
-		$build['ics'] = self::buildRpcValue($this->ics, 'string');
-		$build['iban'] = self::buildRpcValue($this->iban, 'string');
-		$build['bic'] = self::buildRpcValue($this->bic, 'string');
-		$build['recurring'] = self::buildRpcValue($this->recurring, 'bool');
-		$build['debtor'] = self::buildRpcValue($this->debtor);
-		$build['creditor'] = self::buildRpcValue($this->creditor);
+		foreach($vals as $prop => $type) {
+			if(!empty($this->{$prop})) {
+				$build[$prop] = self::buildRpcValue($this->{$prop}, $type);
+			}
+		}
 
 		return new \xmlrpcval($build, 'struct');
+
 	}
 
 	/**

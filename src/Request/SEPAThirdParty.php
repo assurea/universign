@@ -7,13 +7,21 @@ class SEPAThirdParty extends Base
 	public function buildRpcValues(): \xmlrpcval
 	{
 
+		$vals = [
+			'name' =>'string',
+			'address' =>'string',
+			'postalCode' =>'string',
+			'city' =>'string',
+			'country' =>'string',
+		];
+
 		$build = [];
 
-		$build['name'] = self::buildRpcValue($this->name, 'string');
-		$build['address'] = self::buildRpcValue($this->address, 'string');
-		$build['postalCode'] = self::buildRpcValue($this->postalCode, 'string');
-		$build['city'] = self::buildRpcValue($this->city, 'string');
-		$build['country'] = self::buildRpcValue($this->country, 'string');
+		foreach($vals as $prop => $type) {
+			if(!empty($this->{$prop})) {
+				$build[$prop] = self::buildRpcValue($this->{$prop}, $type);
+			}
+		}
 
 		return new \xmlrpcval($build, 'struct');
 	}

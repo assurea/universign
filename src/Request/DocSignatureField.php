@@ -6,13 +6,22 @@ class DocSignatureField extends Base
 {
 	public function buildRpcValues(): \xmlrpcval
 	{
+
+		$vals = [
+			'name' => 'string',
+			'page' => 'int',
+			'x' => 'int',
+			'y' => 'int',
+			'signerIndex' => 'int',
+		];
+
 		$build = [];
 
-		$build['name'] = self::buildRpcValue($this->name, 'string');
-		$build['page'] = self::buildRpcValue($this->page, 'int');
-		$build['x'] = self::buildRpcValue($this->x, 'int');
-		$build['y'] = self::buildRpcValue($this->y, 'int');
-		$build['signerIndex'] = self::buildRpcValue($this->signerIndex, 'int');
+		foreach($vals as $prop => $type) {
+			if(!empty($this->{$prop})) {
+				$build[$prop] = self::buildRpcValue($this->{$prop}, $type);
+			}
+		}
 
 		return new \xmlrpcval($build, 'struct');
 	}

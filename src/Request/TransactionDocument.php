@@ -7,15 +7,23 @@ class TransactionDocument extends Base
 {
 	public function buildRpcValues(): \xmlrpcval
 	{
+		$vals = [
+			'documentType' => 'string',
+			'content' => 'base64',
+			'url' => 'string',
+			'name' => 'string',
+			'title' => 'string',
+			'SEPAData' => null,
+			'signatureFields' => 'array',
+		];
+
 		$build = [];
 
-		$build['documentType'] = self::buildRpcValue($this->documentType, 'string');
-		$build['content'] = self::buildRpcValue($this->content, 'base64');
-		$build['url'] = self::buildRpcValue($this->url, 'string');
-		$build['name'] = self::buildRpcValue($this->name, 'string');
-		$build['title'] = self::buildRpcValue($this->title, 'string');
-		$build['SEPAData'] = self::buildRpcValue($this->SEPAData);
-		$build['signatureFields'] = self::buildRpcValue($this->signatureFields, 'array');
+		foreach($vals as $prop => $type) {
+			if(!empty($this->{$prop})) {
+				$build[$prop] = self::buildRpcValue($this->{$prop}, $type);
+			}
+		}
 
 		return new \xmlrpcval($build, 'struct');
 	}
