@@ -49,7 +49,7 @@ class Requester
             dump($response);
         }
 
-        throw new UnexpectedValueException($response);
+        throw new UnexpectedValueException($response->faultString());
     }
 
     /**
