@@ -39,7 +39,6 @@ class Requester
         $client = $this->getClient();
         $request = new \xmlrpcmsg('requester.requestTransaction', [$transactionRequest->buildRpcValues()]);
         $response = &$client->send($request);
-        $b = $response->value();
 
 
         if (!$response->faultCode()) {
