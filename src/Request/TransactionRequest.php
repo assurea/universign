@@ -1,22 +1,31 @@
 <?php
 
 namespace HumanToComputer\Universign\Request;
-// require_once dirname(__DIR__) . '/Base.php';
 
-abstract class TransactionRequestChainingMode
-{
-    const CHAINING_MODE_NONE = 'none';
-    const CHAINING_MODE_EMAIL = 'email';
-    const CHAINING_MODE_WEB = 'web';
-}
-
-abstract class TransactionRequestCertificate
-{
-    const CERTIFICATE_SIMPLE = 'simple';
-    const CERTIFICATE_CERTIFIED = 'certified';
-    const CERTIFICATE_ADVANCED = 'advanced';
-}
-
+/**
+ * @method string getProfile()
+ * @method self setProfile(string $profile)
+ * @method string getCustomId()
+ * @method self setCustomId(string $customId)
+ * @method TransactionSigner[] getSigners()
+ * @method self setSigners(TransactionSigner[] $signers)
+ * @method TransactionDocument[] getDocuments()
+ * @method self setDocuments(TransactionDocument[] $documents)
+ * @method bool getMustContactFirstSigner()
+ * @method self setMustContactFirstSigner(bool $mustContactFirstSigner)
+ * @method bool getFinalDocSent()
+ * @method self setFinalDocSent(bool $finalDocSent)
+ * @method string getDescription()
+ * @method self setDescription(string $description)
+ * @method string getCertificateType()
+ * @method self setCertificateType(string $certificateType)
+ * @method string getLanguage()
+ * @method self setLanguage(string $language)
+ * @method bool getHandwrittenSignature()
+ * @method self setHandwrittenSignature(bool $handwrittenSignature)
+ * @method string getChainingMode()
+ * @method self setChainingMode(string $chainingMode)
+ */
 class TransactionRequest extends Base
 {
     protected $attributesTypes = [
@@ -33,13 +42,13 @@ class TransactionRequest extends Base
         'chainingMode' => 'string',
     ];
 
-    public function addSigner(TransactionSigner $signer)
+    public function addSigner(TransactionSigner $signer): self
     {
         $this->attributes['signers'][] = $signer;
         return $this;
     }
 
-    public function addDocument(TransactionDocument $document)
+    public function addDocument(TransactionDocument $document): self
     {
         $this->attributes['documents'][] = $document;
         return $this;

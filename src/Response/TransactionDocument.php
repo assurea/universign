@@ -2,6 +2,16 @@
 
 namespace HumanToComputer\Universign\Response;
 
+/**
+ * @method getDocumentType()
+ * @method getContent()
+ * @method getName()
+ * @method getSignatureFields()
+ * @method getCheckBoxTexts()
+ * @method getMetaData()
+ * @method getDisplayName()
+ * @method getSEPAData()
+ */
 class TransactionDocument extends Base
 {
     protected $attributesTypes = [
@@ -12,7 +22,6 @@ class TransactionDocument extends Base
         'checkBoxTexts' => true,
         'metaData' => true,
         'displayName' => true,
-        'signatureFields' => true,
         'SEPAData' => true,
     ];
 }

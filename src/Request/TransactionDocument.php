@@ -1,16 +1,23 @@
 <?php
 
 namespace HumanToComputer\Universign\Request;
-// require_once dirname(__DIR__) . '/Base.php';
 
-abstract class TransactionDocumentType
-{
-    const PDF = 'pdf';
-    const PDF_READ_ONLY = 'pdf-for-presentation';
-    const PDF_OPTIONAL = 'pdf-optional';
-    const SEPA = 'sepa';
-}
-
+/**
+ * @method string getDocumentType()
+ * @method setDocumentType(string $documentType)
+ * @method string getContent()
+ * @method setContent(string $content)
+ * @method string getUrl()
+ * @method setUrl(string $url)
+ * @method string getName()
+ * @method setName(string $name)
+ * @method string getTitle()
+ * @method setTitle(string $title)
+ * @method SEPAData getSEPAData()
+ * @method setSEPAData(SEPAData $sEPAData)
+ * @method DocSignatureField[] getSignatureFields()
+ * @method setSignatureFields(DocSignatureField[] $signatureFields)
+ */
 
 class TransactionDocument extends Base
 {
@@ -20,11 +27,11 @@ class TransactionDocument extends Base
         'url'             => 'string',
         'name'            => 'string',
         'title'           => 'string',
-        'SEPAData' => 'HumanToComputer\Universign\Request\SEPAData',
+        'SEPAData' => SEPAData::class,
         'signatureFields' => 'array',
     ];
 
-    public function addSignatureField(DocSignatureField  $docSignatureField)
+    public function addSignatureField(DocSignatureField  $docSignatureField): self
     {
         $this->attributes['signatureFields'][] = $docSignatureField;
         return $this;
