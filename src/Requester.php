@@ -48,7 +48,7 @@ class Requester
             dump($response);
         }
 
-        throw new UnexpectedValueException($response);
+		throw new UnexpectedValueException($response->faultString(), $response->faultCode());
     }
 
     /**
@@ -73,7 +73,7 @@ class Requester
             return $data;
         }
 
-        throw new UnexpectedValueException($response);
+		throw new UnexpectedValueException($response->faultString(), $response->faultCode());
     }
 
     /**
@@ -98,7 +98,7 @@ class Requester
             return $data;
         }
 
-        throw new UnexpectedValueException($response);
+		throw new UnexpectedValueException($response->faultString(), $response->faultCode());
     }
 
 
@@ -123,7 +123,7 @@ class Requester
             dump($response);
         }
 
-        throw new UnexpectedValueException($response);
+		throw new UnexpectedValueException($response->faultString(), $response->faultCode());
 
 
     }
