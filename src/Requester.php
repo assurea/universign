@@ -36,7 +36,8 @@ class Requester
     public function requestTransaction(TransactionRequest $transactionRequest)
     {
         $client = $this->getClient();
-        $request = new \xmlrpcmsg('requester.requestTransaction', [$transactionRequest->buildRpcValues()]);
+		$GLOBALS['xmlrpc_internalencoding'] = 'UTF-8';
+		$request = new \xmlrpcmsg('requester.requestTransaction', [$transactionRequest->buildRpcValues()]);
         $response = &$client->send($request);
 
         if (!$response->faultCode()) {
@@ -60,7 +61,8 @@ class Requester
     public function getDocumentsByCustomId($customId)
     {
         $client = $this->getClient();
-        $request = new \xmlrpcmsg('requester.getDocumentsByCustomId', [new \xmlrpcval($customId, 'string')]);
+		$GLOBALS['xmlrpc_internalencoding'] = 'UTF-8';
+		$request = new \xmlrpcmsg('requester.getDocumentsByCustomId', [new \xmlrpcval($customId, 'string')]);
         $response = &$client->send($request);
 
         if (!$response->faultCode()) {
@@ -85,7 +87,8 @@ class Requester
     public function getDocuments($transactionId)
     {
         $client = $this->getClient();
-        $request = new \xmlrpcmsg('requester.getDocuments', [new \xmlrpcval($transactionId, 'string')]);
+		$GLOBALS['xmlrpc_internalencoding'] = 'UTF-8';
+		$request = new \xmlrpcmsg('requester.getDocuments', [new \xmlrpcval($transactionId, 'string')]);
         $response = &$client->send($request);
 
         if (!$response->faultCode()) {
@@ -111,7 +114,8 @@ class Requester
     public function getTransactionInfo($transactionId)
     {
         $client = $this->getClient();
-        $request = new \xmlrpcmsg('requester.getTransactionInfo', [new \xmlrpcval($transactionId, 'string')]);
+		$GLOBALS['xmlrpc_internalencoding'] = 'UTF-8';
+		$request = new \xmlrpcmsg('requester.getTransactionInfo', [new \xmlrpcval($transactionId, 'string')]);
         $response = &$client->send($request);
 
         if (!$response->faultCode()) {
