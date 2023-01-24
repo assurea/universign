@@ -3,13 +3,13 @@
 namespace HumanToComputer\Universign\Request;
 
 /**
- * @method string getIdFileAssurea()
- * @method self setIdFileAssurea(string $idFileAssurea)
+ * @method string getJsonMetadata()
+ * @method self setJsonMetadata(string $json)
  */
 
 class MetaData extends Base
 {
 	protected $attributesTypes = [
-		'innerMetadata' => 'array',
+		'jsonMetadata' => 'string',
 	];
 }
