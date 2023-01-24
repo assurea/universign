@@ -2,13 +2,15 @@
 
 namespace HumanToComputer\Universign\Response;
 
+use stdClass;
+
 /**
  * @method getDocumentType()
  * @method getContent()
  * @method getName()
  * @method getSignatureFields()
  * @method getCheckBoxTexts()
- * @method getMetaData()
+ * @method stdClass|null getMetaData()
  * @method getDisplayName()
  * @method getSEPAData()
  */
