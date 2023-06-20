@@ -2358,8 +2358,13 @@ class xmlrpcmsg
         xml_set_character_data_handler($parser, 'xmlrpc_cd');
         xml_set_default_handler($parser, 'xmlrpc_dh');
 
+        // data may be big, parse it in chunks
+        $dataToParse = str_split($data, 512);
+        for ($iToParse = 0; $iToParse < count($dataToParse) - 1; $iToParse++) {
+            xml_parse($parser, $dataToParse[$iToParse], false);
+        }
         // first error check: xml not well formed
-        if (!xml_parse($parser, $data, 1)) {
+        if (!xml_parse($parser, $dataToParse[count($dataToParse) - 1], true)) {
             // thanks to Peter Kocks <peter.kocks@baygate.com>
             if ((xml_get_current_line_number($parser)) == 1) {
                 $errstr = 'XML error at line 1, check URL';
